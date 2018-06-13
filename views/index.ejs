@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Message Board</title>
+</head>
+<body>
+    <h1>The Dojo Message Board</h1>
+    <% if(messages.registration) { %>
+        <% for (var x of messages.registration) { %>
+         <h3><%= x %></h3>
+        <% } %>
+   <%}%>
+
+
+    <form action="/addMsg" method="post">
+    <p>Name:</p><input type="text" name="name" >
+    <p>Message:</p><input type="text" name="msg" style="height: 40px; width: 300px;" ><br><br>
+    <button type="submit">Post Message</button>
+</form>
+<br>
+<a href="/r">Remove All</a>
+
+<p>_____________________________________________</p>
+
+<br> 
+
+<%for(var msg of msgs){ %>
+    <h2>Message</h2>
+    <p> Name: <%=msg.name%></p>
+    <p> Massage: <%=msg.msg%></p><br>
+    Comments:
+    <p>_________________________</p>
+    <%for(var cmt of msg.cmts){%>
+        <h2>com</h2>
+        <p>Name: <%=cmt.name%></p>
+        <p>Comment: <%=cmt.cmt%></p>
+        <p>_________________________</p>
+    <%}%>
+    <form action="/addCmt" method="post">
+        <p>Name:</p><input type="text" name="name" >
+        <p>Comment:</p><input type="text" name="cmt" style="height: 30px; width: 200px;" ><br><br>
+        <p id="msgId" hidden><%=msg.id%></p>
+        <button type="submit">Post Comment</button>
+    </form>
+    <p>_____________________________________________</p>
+    <br>
+<%}%>
+
+</body>
+</html>
